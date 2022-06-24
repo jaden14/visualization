@@ -1,5 +1,5 @@
 <?php
-
+use Inertia\Inertia;
 use App\Http\Controllers\FileHandleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -8,7 +8,7 @@ use App\Http\Controllers\MunicipalityController;
 use App\Http\Controllers\BarangayController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CallddocController;
-
+use App\Http\Controllers\PersonnelController;
 Auth::routes();
 
 
@@ -31,7 +31,15 @@ Route::middleware('auth')->group(function() {
         Route::post('/change-photo', [UserController::class, 'changePhoto']);
     });
     
-    
+    //Personnel
+    Route::prefix('/personnel')->group(function(){
+        Route::get('/', function () {
+            return Inertia::render('personnel/index');
+        });
+        Route::get('/details/{id}',function ($id) {
+            return inertia('personnel/details',['empl_id'=>$id]);
+        });
+    });
     //Avatar file upload
     Route::post('/files/upload', [FileHandleController::class, 'uploadAvatar']);
     Route::delete('/files/upload/delete', [FileHandleController::class, 'destroyAvatar']);
@@ -54,5 +62,4 @@ Route::middleware('auth')->group(function() {
 
     Route::post('get-all-permissions', [PermissionController::class, 'getAllPermissions']);
     Route::post('update-user-permissions', [PermissionController::class, 'updateUserPermissions']);
-    
 });
