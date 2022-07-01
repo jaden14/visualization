@@ -78,8 +78,10 @@
                     </tbody>
                 </table>
                 <p>
-                    <button class="btn btn-outline-primary" @click="prevPage">Previous</button> &nbsp;
-                    <button class="btn btn-outline-primary" @click="nextPage">Next</button>
+                    <button class="btn btn-outline-primary"  v-if="this.currentPage > 1" @click="prevPage">Prev</button> &nbsp;
+                    <button class="btn btn-outline-primary"  v-if="this.currentPage <= 1" :disabled='true' @click="prevPage">Prev</button> &nbsp;
+                    <button class="btn btn-outline-primary" v-if="(this.currentPage*this.pageSize) < this.myLength" @click="nextPage">Next</button>
+                    <button class="btn btn-outline-primary" v-if="(this.currentPage*this.pageSize) >= this.myLength" :disabled='true' @click="nextPage">Next</button>
                 </p>
                 {{ ((currentPage-1)*pageSize)+1 }} to {{ getTo() }} of {{ myLength }} results
             </div>
@@ -144,7 +146,6 @@ export default {
             pos.sort();
             this.positions_arr =pos;
             this.myLength = this.temp1.length;
-            
             return this.temp1.sort((a,b) => {
                         let modifier = 1;
                         if(this.currentSortDir === 'desc') modifier = -1;
@@ -157,7 +158,7 @@ export default {
                         let end = this.currentPage*this.pageSize;
                         if(index >= start && index < end) return true;
             });
-        }
+        },
     },
     mounted(){
         this.getData();
@@ -168,6 +169,7 @@ export default {
             var off =[];
             var pos = [];
             off.push("");
+            pos.push("");
             axios.post(uri,this.PersonnelData).then((response)=>{
                 this.PersonnelData = response.data;
                 this.offices = _.groupBy(response.data, "department_code")
@@ -175,10 +177,11 @@ export default {
                 _.forEach(this.offices, function(e) {
                     off.push(e[0].department_name1);
                 })
-                pos.push("");
+                
                 _.forEach(this.positions, function(e) {
                     pos.push(e[0].position_title1);
                 })
+                //console.log(response.data);
                 this.offices_arr=off;
                 this.offices_arr.sort();
                 this.positions_arr = pos;
@@ -187,9 +190,11 @@ export default {
             this.myLength = this.PersonnelData.length;
         },
         nextPage:function() {
+            
             if((this.currentPage*this.pageSize) < this.myLength) this.currentPage++;
         },
         prevPage:function() {
+            
             if(this.currentPage > 1) this.currentPage--;
         },
         showFilter() {
@@ -217,7 +222,7 @@ export default {
         },
         searchMe(){
             this.currentPage=1;
-        }
+        },
     },
 }
 </script>

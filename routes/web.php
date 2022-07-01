@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/', function () {
             return Inertia::render('personnel/index');
         });
+        Route::get('/fetcher',[FileHandleController::class,'get_personnel']);
         Route::get('/details/{id}',function ($id) {
             return inertia('personnel/details',['empl_id'=>$id]);
         });

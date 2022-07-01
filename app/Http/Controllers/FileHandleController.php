@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class FileHandleController extends Controller
 {
@@ -42,6 +43,18 @@ class FileHandleController extends Controller
         $temporaryFile->delete();
 
         return "removed";
+    }
+
+    public function get_personnel(){
+        
+        $data=[];
+        //192.168.9.101:91/api/EmployeesAttendance?empl_id='+this.empl_id+'&year='+yr+'&month='+mo
+        //192.168.9.101:91/api/ListOfEmployees
+        $response = Http::post('192.168.9.101:91/api/ListOfEmployees');
+        $data=$response;
+        dd("response: ".$data);
+        //$data->toJson();
+        return $data;
     }
 
 }

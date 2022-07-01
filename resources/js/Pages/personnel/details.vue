@@ -164,7 +164,6 @@ export default {
                 this.attendanceData = response.data;
                 this.attendanceData = _.orderBy(this.attendanceData, ['dtr_date'],['asc']); 
             })
-            
             /*this.attendanceData.sort(function compare(a, b) {
                 var dateA = new Date(a.dtr_date);
                 var dateB = new Date(b.dtr_date);

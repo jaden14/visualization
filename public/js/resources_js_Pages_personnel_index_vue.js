@@ -115,6 +115,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 off = [];
                 pos = [];
                 off.push("");
+                pos.push("");
                 axios.post(uri, _this2.PersonnelData).then(function (response) {
                   _this2.PersonnelData = response.data;
                   _this2.offices = _.groupBy(response.data, "department_code");
@@ -124,11 +125,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     off.push(e[0].department_name1);
                   });
 
-                  pos.push("");
-
                   _.forEach(_this2.positions, function (e) {
                     pos.push(e[0].position_title1);
-                  });
+                  }); //console.log(response.data);
+
 
                   _this2.offices_arr = off;
 
@@ -140,7 +140,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 _this2.myLength = _this2.PersonnelData.length;
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -334,6 +334,8 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ");
 
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -457,17 +459,33 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["href"])])])])])]);
   }), 256
   /* UNKEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [this.currentPage > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     "class": "btn btn-outline-primary",
     onClick: _cache[13] || (_cache[13] = function () {
       return $options.prevPage && $options.prevPage.apply($options, arguments);
     })
-  }, "Previous"), _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, "Prev")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_29, this.currentPage <= 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 1,
     "class": "btn btn-outline-primary",
+    disabled: true,
     onClick: _cache[14] || (_cache[14] = function () {
+      return $options.prevPage && $options.prevPage.apply($options, arguments);
+    })
+  }, "Prev")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_30, this.currentPage * this.pageSize < this.myLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 2,
+    "class": "btn btn-outline-primary",
+    onClick: _cache[15] || (_cache[15] = function () {
       return $options.nextPage && $options.nextPage.apply($options, arguments);
     })
-  }, "Next")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.currentPage - 1) * $data.pageSize + 1) + " to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getTo()) + " of " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.myLength) + " results ", 1
+  }, "Next")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.currentPage * this.pageSize >= this.myLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 3,
+    "class": "btn btn-outline-primary",
+    disabled: true,
+    onClick: _cache[16] || (_cache[16] = function () {
+      return $options.nextPage && $options.nextPage.apply($options, arguments);
+    })
+  }, "Next")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.currentPage - 1) * $data.pageSize + 1) + " to " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getTo()) + " of " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.myLength) + " results ", 1
   /* TEXT */
   )])])])], 64
   /* STABLE_FRAGMENT */
