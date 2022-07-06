@@ -79,7 +79,6 @@
                         </tr>
                     </tbody>
                 </table>
-
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <!-- read the explanation in the Paginate.vue component -->
@@ -125,7 +124,7 @@ export default {
             showModal: false,
             permissions: [],
             selectedPermissions: [],
-            selectedUser: ""
+            selectedUser: "",
         };
     },
     watch: {
@@ -166,7 +165,6 @@ export default {
         },
         updatePermissions() {
             this.showModal = false
-
             this.$inertia.post('update-user-permissions', {
                     'user_id' : this.selectedUser,
                     'permissions' : this.selectedPermissions
