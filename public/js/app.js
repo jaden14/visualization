@@ -1296,6 +1296,16 @@ var map = {
 		"./resources/js/Pages/charts/BarChart.vue",
 		"/js/vendor",
 		"resources_js_Pages_charts_BarChart_vue"
+	],
+	"./charts/PieChar": [
+		"./resources/js/Pages/charts/PieChar.vue",
+		"/js/vendor",
+		"resources_js_Pages_charts_PieChar_vue"
+	],
+	"./charts/PieChar.vue": [
+		"./resources/js/Pages/charts/PieChar.vue",
+		"/js/vendor",
+		"resources_js_Pages_charts_PieChar_vue"
 	]
 };
 function webpackAsyncContext(req) {

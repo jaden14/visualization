@@ -51,19 +51,20 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
       "default": function _default() {
         [];
       }
-    }
+    },
+    casetrend: Object
   },
   data: function data() {
     return {
       chartData: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: "",
         datasets: [{
           label: 'Case Count',
-          backgroundColor: '#f87979',
+          backgroundColor: ['#1B4F72', '#145A32', '#641E16', '#1B2631', '#7B7D7D', '#6E2C00', '#512E5F'],
           pointBackgroundColor: 'white',
           borderWidth: 1,
           pointBorderColor: '#249EBF',
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: ""
         }]
       },
       chartOptions: {
@@ -77,6 +78,20 @@ chart_js__WEBPACK_IMPORTED_MODULE_0__.Chart.register(chart_js__WEBPACK_IMPORTED_
         }
       }
     };
+  },
+  mounted: function mounted() {
+    var Months = new Array();
+    var Datas = new Array();
+    var data = this.casetrend;
+
+    if (data) {
+      data.forEach(function (element) {
+        Months.push(element.month);
+        Datas.push(element.tvisists);
+      });
+      this.chartData.labels = Months;
+      this.chartData.datasets[0].data = Datas;
+    }
   }
 });
 

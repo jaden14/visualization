@@ -49,20 +49,29 @@ export default {
     plugins: {
       type: Object,
       default: () => {[]}
-    }
+    },
+    casetrend: Object
   },
   data() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March','April','May','June','July' ],
+        labels: "",
         datasets: [ 
           {
             label: 'Case Count',
-            backgroundColor: '#f87979',
+            backgroundColor:  [
+      '#1B4F72',
+      '#145A32',
+      '#641E16',
+      '#1B2631',
+      '#7B7D7D',
+      '#6E2C00',
+      '#512E5F'
+            ],
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: '#249EBF',
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: ""
 
           } ]
       },
@@ -77,6 +86,20 @@ export default {
     }
       }
     }
-  }
+  },
+  mounted() {
+        let Months = new Array();
+        let Datas = new Array();
+
+        let data = this.casetrend;
+        if(data){
+            data.forEach(element => {
+            Months.push(element.month);
+            Datas.push(element.tvisists);
+          })
+            this.chartData.labels = Months;
+            this.chartData.datasets[0].data = Datas;
+        }
+    },
 }
 </script>
